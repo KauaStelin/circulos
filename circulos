@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimento dos Círculos</title>
+</head>
+<body>
+    <canvas id="meuCanvas" width="600" height="400" style="border:1px solid #000000;"></canvas>
+
+    <script>
+        var canvas = document.getElementById("meuCanvas");
+        var ctx = canvas.getContext("2d");
+
+        // Posições iniciais dos círculos
+        var x1 = 50;  // Círculo amarelo
+        var y1 = 50;
+        var x2 = canvas.width - 50;  // Círculo azul
+        var y2 = canvas.height - 50;
+
+        // Velocidades dos círculos
+        var dx1 = 2;
+        var dy1 = 2;
+        var dx2 = -2;
+        var dy2 = -2;
+
+        function desenhaCirculos() {
+            // Limpa o canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Desenha o círculo amarelo
+            ctx.beginPath();
+            ctx.arc(x1, y1, 20, 0, Math.PI * 2);
+            ctx.fillStyle = "yellow";
+            ctx.fill();
+            ctx.closePath();
+
+            // Desenha o círculo azul
+            ctx.beginPath();
+            ctx.arc(x2, y2, 20, 0, Math.PI * 2);
+            ctx.fillStyle = "blue";
+            ctx.fill();
+            ctx.closePath();
+
+            // Atualiza a posição dos círculos
+            x1 += dx1;
+            y1 += dy1;
+            x2 += dx2;
+            y2 += dy2;
+
+            // Para os círculos quando atingirem os cantos opostos
+            if (x1 >= canvas.width - 50 || y1 >= canvas.height - 50) {
+                dx1 = 0;
+                dy1 = 0;
+            }
+
+            if (x2 <= 50 || y2 <= 50) {
+                dx2 = 0;
+                dy2 = 0;
+            }
+        }
+
+        // Atualiza o desenho a cada 10 milissegundos
+        setInterval(desenhaCirculos, 10);
+    </script>
+</body>
+</html>
